@@ -2,14 +2,16 @@
 # Find JSON file at: https://fantasy.premierleague.com/api/bootstrap-static/
 # Exports an .ics file that contains the FPL's Gameweek deadlines 
 
-import json
-#import requests # TODO: retrieve JSON from website instead of downloaded file.
+# TODO: Add alarm time as a function parameter
+
+import requests
 import icalendar
 import re
 from datetime import timedelta
 
-with open("./download.json") as readFile:
-    data = json.load(readFile)
+# Get JSON from FPL's API
+response = requests.get("https://fantasy.premierleague.com/api/bootstrap-static/")
+data = response.json()
 
 # Define calendar
 cal = icalendar.Calendar()
